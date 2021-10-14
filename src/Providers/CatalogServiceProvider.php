@@ -9,7 +9,7 @@ use Marcosorozco\Catalogs\Http\Middleware\CatalogCodeValid;
 use Marcosorozco\Catalogs\Sources\Catalogs\CatalogRepositoryInterface;
 use Marcosorozco\Catalogs\Sources\Catalogs\CatalogValidator;
 
-class CatalogProvider extends ServiceProvider
+class CatalogServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
@@ -18,10 +18,8 @@ class CatalogProvider extends ServiceProvider
      */
     public function register()
     {
-        $router = resolve(Router::class);
         # Catalogs
         $this->app->bind(CatalogRepositoryInterface::class, CatalogValidator::class);
-        $router->middleware('catalog-code-valid', CatalogCodeValid::class);
     }
 
     /**
@@ -29,15 +27,16 @@ class CatalogProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Router $router)
     {
         Schema::defaultStringLength(191);
-        $this->loadConfig();
+        $this->loadConfig($router);
     }
 
-    private function loadConfig() : void
+    private function loadConfig(Router $router) : void
     {
         $this->loadRoutesFrom(__DIR__ . '/../../routes/web.php');
+        $router->middlewareGroup('catalog-code-valid', [CatalogCodeValid::class]);
         $this->publishes(
             [
                 __DIR__ . '/../../config/catalog.php' => config_path('catalog.php'),
