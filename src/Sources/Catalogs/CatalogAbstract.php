@@ -31,7 +31,7 @@ abstract class CatalogAbstract extends Model
         return [];
     }
 
-    public function getMessages(): array
+    public static function getMessages(): array
     {
         return [];
     }
