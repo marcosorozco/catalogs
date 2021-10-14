@@ -22,7 +22,7 @@ class CatalogController extends Controller
     public function __construct(
         CatalogRepositoryInterface $catalogRepository
     ) {
-        $this->middleware(array_merge(['catalog-code-valid'], Config::get('catalog.middleware')));
+        $this->middleware(array_merge(['catalog-code-valid'], Config::get('catalog.middleware', [])));
         $this->catalogRepository = $catalogRepository;
     }
 
