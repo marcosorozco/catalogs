@@ -1,0 +1,21 @@
+{
+    "name": "marcosorozco/catalogs",
+    "description": "Catalog data filling process",
+    "type": "package",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Marcosorozco\\Catalogs\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Marcos Orozco",
+            "email": "marcosorozco.14@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "laravel/framework": "8.x-dev"
+    }
+}
