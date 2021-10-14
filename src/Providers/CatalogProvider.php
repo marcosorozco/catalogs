@@ -2,8 +2,10 @@
 
 namespace Marcosorozco\Catalogs\Providers;
 
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Marcosorozco\Catalogs\Http\Middleware\CatalogCodeValid;
 use Marcosorozco\Catalogs\Sources\Catalogs\CatalogRepositoryInterface;
 use Marcosorozco\Catalogs\Sources\Catalogs\CatalogValidator;
 
@@ -16,8 +18,10 @@ class CatalogProvider extends ServiceProvider
      */
     public function register()
     {
+        $router = resolve(Router::class);
         # Catalogs
         $this->app->bind(CatalogRepositoryInterface::class, CatalogValidator::class);
+        $router->middleware('catalog-code-valid', CatalogCodeValid::class);
     }
 
     /**
