@@ -33,12 +33,12 @@ class CatalogProvider extends ServiceProvider
 
     private function loadConfig() : void
     {
-        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+        $this->loadRoutesFrom(__DIR__ . '/../../routes/web.php');
         $this->publishes(
             [
-                __DIR__ . '/../config/catalog.php' => config_path('catalog.php'),
-                __DIR__ . '/../database/migrations' => base_path('database/migrations'),
-                __DIR__ . '/../resources/views' => resource_path('views'),
+                __DIR__ . '/../../config/catalog.php' => config_path('catalog.php'),
+                __DIR__ . '/../../database/migrations' => base_path('database/migrations'),
+                __DIR__ . '/../../resources/views' => resource_path('views'),
             ],
             'catalog'
         );
