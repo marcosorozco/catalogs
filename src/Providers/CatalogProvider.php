@@ -28,6 +28,7 @@ class CatalogProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        $this->loadConfig();
     }
 
     private function loadConfig() : void
